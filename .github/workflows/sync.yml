@@ -1,0 +1,32 @@
+name: MemOS-gbrain Sync
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:       # Manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install gbrain
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          export PATH="$HOME/.bun/bin:$PATH"
+          git clone https://github.com/garrytan/gbrain.git ~/gbrain
+          cd ~/gbrain && bun install
+
+      - name: Run bridge
+        env:
+          GBRAIN_HOME: ${{ github.workspace }}/gbrain
+          MEMOS_HOME: ${{ github.workspace }}/.hermes/memos-plugin
+        run: |
+          export PATH="$HOME/.bun/bin:$PATH"
+          python3 scripts/bridge.py --full-sync

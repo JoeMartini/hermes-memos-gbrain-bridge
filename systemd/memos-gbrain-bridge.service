@@ -1,0 +1,10 @@
+[Unit]
+Description=Hermes-MemOS-gbrain Bridge - Knowledge Sync
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env bash -c 'cd %h/projects/hermes-memos-gbrain-bridge && python3 scripts/bridge.py --auto-discover'
+Environment="PYTHONPATH=%h/projects/hermes-memos-gbrain-bridge/src"
+StandardOutput=journal
+StandardError=journal

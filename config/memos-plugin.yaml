@@ -1,0 +1,54 @@
+# MemOS Plugin Configuration Template
+# Copy to: ~/.hermes/memos-plugin/config.yaml
+#          ~/.hermes/memos-plugin-<profile>/config.yaml (per-profile)
+#
+# This configures the MemOS memory system that captures Hermes session traces.
+# Each profile can have its own isolated MemOS instance.
+#
+# For SiliconFlow integration guide, see docs/SILICONFLOW_INTEGRATION.md
+
+version: 1
+
+# ─── LLM Configuration ──────────────────────────────────────────────────────
+# Used for MemAgent (memory extraction) and summarization
+llm:
+  provider: openai_compatible
+  base_url: https://api.example.com/v1  # CHANGE THIS: your LLM provider
+  api_key: ${LLM_API_KEY}  # CHANGE THIS: set via environment variable
+  model: provider/model-name  # CHANGE THIS: e.g. Qwen/Qwen3-8B, gpt-4o
+
+# ─── Embedding Configuration ────────────────────────────────────────────────
+# Must match gbrain's embedding model for vector compatibility
+# See docs/SILICONFLOW_INTEGRATION.md for SiliconFlow setup
+embedding:
+  provider: openai_compatible
+  base_url: https://api.example.com/v1  # CHANGE THIS: your embedding provider
+  api_key: ${EMBEDDING_API_KEY}  # CHANGE THIS: set via environment variable
+  model: provider/embedding-model  # CHANGE THIS: e.g. Qwen/Qwen3-Embedding-8B
+  dimensions: 4096  # CHANGE THIS: must match gbrain config
+
+# ─── Algorithm Settings ─────────────────────────────────────────────────────
+algorithm:
+  lightweightMemory:
+    enabled: false  # Set true for lighter-weight memory (fewer LLM calls)
+
+# ─── Hub (Optional) ─────────────────────────────────────────────────────────
+# For team/shared memory synchronization
+hub:
+  enabled: false
+  address: ""
+  teamToken: ""
+
+# ─── Telemetry ──────────────────────────────────────────────────────────────
+telemetry:
+  enabled: false
+
+# ─── Logging ────────────────────────────────────────────────────────────────
+logging:
+  level: info
+  detailedView: false
+
+# ─── Web Viewer ─────────────────────────────────────────────────────────────
+# Optional web UI for browsing traces
+viewer:
+  port: 18800  # Change if port conflicts

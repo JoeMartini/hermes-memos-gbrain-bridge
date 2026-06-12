@@ -1,0 +1,9 @@
+# Hermes-MemOS-gbrain Bridge Dependencies
+# Python 3.11+ required
+
+# No external dependencies for core bridge
+# (uses only stdlib: sqlite3, json, subprocess, argparse, pathlib, uuid)
+
+# Optional: for testing
+# pytest>=8.0
+# pytest-cov>=4.0

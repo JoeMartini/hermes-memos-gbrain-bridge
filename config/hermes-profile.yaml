@@ -1,0 +1,19 @@
+# Hermes Profile Configuration Snippet
+# Add this to your profile's config.yaml: ~/.hermes/profiles/<name>/config.yaml
+#
+# This enables the MemOS plugin for session memory capture.
+# The bridge will automatically discover and export from all profiles.
+
+plugins:
+  enabled:
+    - memos  # Enable MemOS memory plugin for this profile
+
+# Optional: Configure memory system behavior
+memory:
+  memory_enabled: true         # Enable persistent memory
+  user_profile_enabled: true   # Enable user profile tracking
+  memory_char_limit: 2200      # Max chars for assistant memory injection
+  user_char_limit: 1375        # Max chars for user profile
+  provider: memtensor          # Memory storage backend
+  nudge_interval: 10           # Turns between memory nudges
+  flush_min_turns: 6           # Min turns before flushing to MemOS

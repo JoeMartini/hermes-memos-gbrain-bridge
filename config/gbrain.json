@@ -1,0 +1,18 @@
+{
+  "_comment": "gbrain configuration template. Copy to ~/.gbrain/config.json",
+  "_comment2": "For security, set password via environment variable GBRAIN_PASSWORD",
+  "_comment3": "or use gbrain init to generate this file interactively.",
+  "_comment4": "For SiliconFlow integration, see docs/SILICONFLOW_INTEGRATION.md",
+
+  "engine": "postgres",
+  "embedding_model": "provider:embedding-model-name",
+  "embedding_dimensions": 4096,
+
+  "host": "localhost",
+  "port": 5432,
+  "database": "gbrain",
+  "user": "gbrain_user",
+  "password": "CHANGE_THIS_PASSWORD",
+
+  "database_url": "postgresql://gbrain_user:***@localhost:5432/gbrain"
+}

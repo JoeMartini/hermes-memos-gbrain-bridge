@@ -1,0 +1,23 @@
+# Optional: PostgreSQL + pgvector for gbrain
+# Run: docker compose up -d
+
+services:
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: gbrain-postgres
+    environment:
+      POSTGRES_USER: gbrain_user
+      POSTGRES_PASSWORD: CHANGE_THIS_PASSWORD
+      POSTGRES_DB: gbrain
+    ports:
+      - "5432:5432"
+    volumes:
+      - gbrain-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gbrain_user -d gbrain"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  gbrain-data:
